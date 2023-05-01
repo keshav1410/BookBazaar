@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import "./App.css";
+import UserSignUp from "./Pages/UserSignUp";
+import SignIn from "./Pages/SignIn";
+import ForgotPassword from "./Pages/ForgetPassword";
+import VendorSignUp from "./Pages/VendorSignUp";
+import Home from "./Pages/Home";
 
-function App() {
+const App = () => {
+  const theme = createTheme();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/usersignup" element={<UserSignUp />} />
+            <Route path="/vendorsignup" element={<VendorSignUp />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </>
   );
-}
+};
 
 export default App;

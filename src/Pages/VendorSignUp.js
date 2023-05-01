@@ -1,0 +1,139 @@
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useForm } from "react-hook-form";
+import Footer from "../Components/Footer";
+
+export default function VendorSignUp() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+  return (
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ mt: 3 }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                autoComplete="given-name"
+                error={errors.firstName ? true : false}
+                helperText={
+                  (errors.firstName?.type === "required" &&
+                    "First Name is required") ||
+                  (errors.firstName?.type === "maxLength" &&
+                    "Max 30 characters allowed")
+                }
+                {...register("firstName", { required: true, maxLength: 30 })}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="family-name"
+                error={errors.lastName ? true : false}
+                helperText={
+                  (errors.firstName?.type === "required" &&
+                    "Last Name is required") ||
+                  (errors.firstName?.type === "maxLength" &&
+                    "Max 30 characters allowed")
+                }
+                {...register("lastName", { required: true, maxLength: 30 })}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                error={errors.email ? true : false}
+                helperText={
+                  (errors.email?.type === "required" && "Email is required") ||
+                  (errors.email?.type === "pattern" &&
+                    "Email format is incorrect")
+                }
+                {...register("email", {
+                  required: true,
+                  pattern: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/,
+                })}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="password"
+                error={errors.password ? true : false}
+                helperText={
+                  (errors.password?.type === "required" &&
+                    "Password is required") ||
+                  (errors.password?.type === "pattern" &&
+                    "Password should contain UpperCase, LowerCase, Number, SpecialCharacter and min 8 characters")
+                }
+                {...register("password", {
+                  required: true,
+                  pattern:
+                    /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+                })}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="/" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+      <Footer sx={{ mt: 5 }} />
+    </Container>
+  );
+}
