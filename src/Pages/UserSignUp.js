@@ -38,11 +38,11 @@ export default function UserSignUp() {
     if (data.firstName && data.email && data.lastName && data.password) {
       setLoading(true);
       axios
-        .post(`https://localhost:7196/api/Authentication?role=User`, data)
+        .post(`https://localhost:7250/api/Auth/api/signup`, data)
         .then((response) => {
           console.log(response.data);
           reset();
-          setMessage(response.data.message);
+          // setMessage(response.data.message);
           setLoading(false);
           setSeverity("success");
           setOpen(true);

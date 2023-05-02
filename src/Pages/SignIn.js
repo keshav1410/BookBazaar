@@ -35,7 +35,7 @@ export default function SignIn() {
     if (data.email && data.password) {
       setLoading(true);
       axios
-        .post(`https://localhost:7196/api/Authentication/login`, data)
+        .post(`https://localhost:7250/api/Auth/api/login`, data)
         .then((response) => {
           console.log(response.data);
           reset();
