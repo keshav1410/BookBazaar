@@ -46,7 +46,7 @@ export default function UserSignUp() {
           setLoading(false);
           setSeverity("success");
           setOpen(true);
-          navigate("/");
+          navigate("/signin");
         })
         .catch((error) => {
           setMessage(error.data.message);
@@ -170,7 +170,7 @@ export default function UserSignUp() {
           </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="/" variant="body2">
+              <Link href="/signin" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
