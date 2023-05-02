@@ -6,6 +6,7 @@ import UserSignUp from "./Pages/UserSignUp";
 import SignIn from "./Pages/SignIn";
 import ForgotPassword from "./Pages/ForgetPassword";
 import Home from "./Pages/Home";
+import Category from "./Components/Category";
 
 const App = () => {
   const theme = createTheme();
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/signup" element={<UserSignUp />} />
             <Route path="/" element={<Home />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/category/:id" element={<Category />} />
           </Routes>
         </Router>
       </ThemeProvider>
