@@ -38,6 +38,7 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          backgroundColor: "#FFF5EE",
         }}
       >
         <Typography
