@@ -5,7 +5,6 @@ import "./App.css";
 import UserSignUp from "./Pages/UserSignUp";
 import SignIn from "./Pages/SignIn";
 import ForgotPassword from "./Pages/ForgetPassword";
-import VendorSignUp from "./Pages/VendorSignUp";
 import Home from "./Pages/Home";
 
 const App = () => {
@@ -17,10 +16,9 @@ const App = () => {
         <CssBaseline />
         <Router>
           <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/usersignup" element={<UserSignUp />} />
-            <Route path="/vendorsignup" element={<VendorSignUp />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<UserSignUp />} />
+            <Route path="/" element={<Home />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
           </Routes>
         </Router>

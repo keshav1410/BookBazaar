@@ -43,7 +43,7 @@ export default function SignIn() {
           setLoading(false);
           setSeverity("success");
           setOpen(true);
-          navigate("/home");
+          navigate("/");
         })
         .catch((error) => {
           console.log(error);
@@ -130,7 +130,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/usersignup" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
