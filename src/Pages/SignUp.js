@@ -14,7 +14,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { Alert, Snackbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function UserSignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");

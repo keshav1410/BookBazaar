@@ -9,9 +9,28 @@ import { Box } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  // const settings = ["Profile", "Account", "Logout"];
+  const navigate = useNavigate();
+  const settings = [
+    {
+      name: "Profile",
+      route: "profile",
+    },
+    {
+      name: "Publish Book",
+      route: "publish",
+    },
+    {
+      name: "Account",
+      route: "account",
+    },
+    {
+      name: "Logout",
+    },
+  ];
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -38,7 +57,7 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "#FFF5EE",
+          backgroundColor: "#F9F9F9",
         }}
       >
         <Typography
@@ -91,8 +110,18 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => {
+                      if (setting.name === "Logout") {
+                      } else {
+                        navigate(`/${setting.route}`);
+                      }
+                    }}
+                  >
+                    {setting.name}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
