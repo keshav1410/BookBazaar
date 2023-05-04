@@ -11,7 +11,8 @@ const BookCard = ({ categoryId, categoryName }) => {
   const navigate = useNavigate();
   return (
     <Paper
-      elevation={4}
+      variant="outlined"
+      elevation={0}
       sx={{
         p: 2,
         display: "flex",
@@ -25,6 +26,9 @@ const BookCard = ({ categoryId, categoryName }) => {
         fontSize: "20px",
         lineHeight: "17px",
         color: "#858585",
+        ":hover": {
+          boxShadow: 5, // theme.shadows[20]
+        },
       }}
       onClick={() => navigate(`/category/${categoryId}`)}
     >

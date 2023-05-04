@@ -38,7 +38,7 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "#FFF5EE",
+          backgroundColor: "#F9F9F9",
         }}
       >
         <Typography
