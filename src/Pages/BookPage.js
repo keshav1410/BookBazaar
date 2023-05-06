@@ -1,115 +1,180 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  LinearProgress,
+  Rating,
+  Typography,
+} from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { selectBook } from "../Redux/Actions/books";
 
 const BookPage = () => {
-  const data = {
-    bookId: "4",
-    title: "The Haunting of Hill House",
-    bookAuthor: "The Haunting of Hill House",
-    price: 678,
-    bookRating: 4,
-    bookCover: "/assets/CategoryCover/Horror.jpg",
-    description:
-      "The Haunting of Hill House is a 1959 gothic horror novel by American author Shirley Jackson. A finalist for the National Book Award and considered one of the best literary ghost stories published during the 20th century, it has been made into two feature films and a play, and is the basis of a Netflix series. ",
-  };
+  const dispatch = useDispatch();
+  let { bookId } = useParams();
+  let book = useSelector((state) => state.book);
+  const [loading, setLoading] = useState();
+  useEffect(() => {
+    if (bookId) {
+      const fetchBook = async () => {
+        setLoading(true);
+        await axios
+          .get(`https://localhost:7250/api/Books/api/book/${bookId}`)
+          .then((res) => {
+            console.log(res.data);
+            dispatch(selectBook(res.data));
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoading(false);
+          });
+      };
+      fetchBook();
+    }
+  }, []);
   return (
     <>
       <Navbar />
-      <Box>
-        <Grid
-          container
-          style={{
-            minHeight: "500px",
-            margin: "50px auto",
-          }}
-        >
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <Box>
           <Grid
-            item
-            xs={12}
-            md={5}
-            display="flex"
-            justifyContent="center"
-            sx={{
-              alignItems: "center",
+            container
+            style={{
+              minHeight: "500px",
+              margin: "50px auto",
             }}
           >
-            <img
-              src={data.bookCover}
-              alt={data.title}
-              style={{ aspectRatio: 2 / 3 }}
-            />
+            <Grid
+              item
+              xs={12}
+              md={5}
+              display="flex"
+              justifyContent="center"
+              sx={{
+                alignItems: "center",
+              }}
+            >
+              <img
+                src="/assets/CategoryCover/HistoricalFiction.jpg"
+                // src={book.bookImage}
+                alt={book.title}
+                style={{ aspectRatio: 2 / 3 }}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={7}
+              display="flex"
+              justifyContent="center"
+              sx={{
+                flexDirection: "column",
+              }}
+            >
+              <Box sx={{ m: "auto", py: 3, px: 6 }}>
+                <Typography
+                  variant="h4"
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "800",
+                    fontSize: "36px",
+                    lineHeight: "44px",
+                    color: "black",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {book.title}
+                </Typography>
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "600",
+                    fontSize: "22px",
+                    lineHeight: "44px",
+                    color: "#707070",
+                  }}
+                >
+                  <span style={{ color: "black" }}>Author : </span>
+                  {book.authorName}
+                </Typography>
+                <Rating
+                  name="half-rating-read"
+                  defaultValue={book?.rating}
+                  precision={0.1}
+                  readOnly
+                />
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "600",
+                    fontSize: "25px",
+                    lineHeight: "44px",
+                    color: "#707070",
+                  }}
+                >
+                  <span style={{ color: "black" }}>Price : </span>₹{book.price}
+                </Typography>
+                <Typography
+                  variant="h3"
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "600",
+                    fontSize: "21px",
+                    lineHeight: "44px",
+                    color: "#707070",
+                  }}
+                >
+                  <span style={{ color: "black" }}>ISBN Number : </span>
+                  {book.isbn}
+                </Typography>
+                <Typography
+                  variant="h4"
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "600",
+                    fontSize: "20px",
+                    lineHeight: "44px",
+                    color: "black",
+                  }}
+                >
+                  Description :
+                </Typography>
+                <Typography
+                  variant="h4"
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "500",
+                    fontSize: "18px",
+                    lineHeight: "44px",
+                    color: "#707070",
+                    textAlign: "justify",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {book.description}
+                </Typography>
+                <Button
+                  variant="contained"
+                  disabled={book.quantity <= 0 ? true : false}
+                  endIcon={<ShoppingCartIcon />}
+                >
+                  {book.quantity <= 0 ? "Sold out" : "Add to Cart"}
+                </Button>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={7}
-            display="flex"
-            justifyContent="center"
-            sx={{
-              flexDirection: "column",
-            }}
-          >
-            <Box sx={{ m: "auto", py: 3, px: 6 }}>
-              <Typography
-                variant="h4"
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "800",
-                  fontSize: "36px",
-                  lineHeight: "44px",
-                  color: "black",
-                  marginBottom: "10px",
-                }}
-              >
-                {data.title}
-              </Typography>
-              <Typography
-                variant="h3"
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "500",
-                  fontSize: "25px",
-                  lineHeight: "44px",
-                  color: "black",
-                }}
-              >
-                Price : ₹{data.price}
-              </Typography>
-              <Typography
-                variant="h4"
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "600",
-                  fontSize: "20px",
-                  lineHeight: "44px",
-                  color: "black",
-                }}
-              >
-                Description:
-              </Typography>
-              <Typography
-                variant="h4"
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "400",
-                  fontSize: "18px",
-                  lineHeight: "44px",
-                  color: "black",
-                  textAlign: "justify",
-                  marginBottom: "10px",
-                }}
-              >
-                {data.description}
-              </Typography>
-              <Button variant="contained" endIcon={<ShoppingCartIcon />}>
-                Add to Cart
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      )}
     </>
   );
 };

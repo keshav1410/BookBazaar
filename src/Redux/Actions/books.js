@@ -7,7 +7,7 @@ export const addBooks = (books) => {
   };
 };
 
-export const selectedBook = (book) => {
+export const selectBook = (book) => {
   return {
     type: ActionTypes.SELECTED_BOOK,
     payload: book,

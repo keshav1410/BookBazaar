@@ -1,28 +1,22 @@
 import { ActionTypes } from "../Constants/actionTypes";
 
 const initialState = {
-  books: [
-    {
-      bookID: 1,
-      title: "Ikigai",
-      description:
-        "The Japanese secret to a long and happy life [Hardcover] García, Héctor and Miralles, Francesc Hardcover – 27 September 2017",
-      authorName: "Francesc Miralles",
-      price: 349,
-      quantity: 0,
-      isbn: "178633089X",
-      bookImage: "ikigai.jpg",
-      userID: 2,
-      categoryID: null,
-      rating: 4.6,
-    },
-  ],
+  books: [],
 };
 
 export const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_BOOKS:
+      return { ...state, books: action.payload };
+    default:
       return state;
+  }
+};
+
+export const selectBookReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ActionTypes.SELECTED_BOOK:
+      return { ...state, ...action.payload };
     default:
       return state;
   }

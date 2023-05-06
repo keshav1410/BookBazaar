@@ -27,7 +27,7 @@ const PublishBook = () => {
               fontWeight: "700",
               fontSize: "40px",
               lineHeight: "17px",
-              color: "#858585",
+              color: "#3e3c3c",
               my: 4,
             }}
           >

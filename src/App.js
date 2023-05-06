@@ -27,7 +27,7 @@ const App = () => {
               path="/:categoryName/:categoryId"
               element={<CategoryPage />}
             />
-            <Route path="/book/:id" element={<BookPage />} />
+            <Route path="/book/:bookId" element={<BookPage />} />
             <Route path="/profile/:userId" element={<BookPage />} />
             <Route path="/settings" element={<BookPage />} />
             <Route path="/publish" element={<PublishBook />} />

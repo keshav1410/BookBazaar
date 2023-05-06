@@ -24,8 +24,12 @@ const Navbar = () => {
       route: "publish",
     },
     {
-      name: "Account",
+      name: "Manage Books",
       route: "account",
+    },
+    {
+      name: "Manage Users",
+      route: "manageusers",
     },
     {
       name: "Logout",
@@ -57,7 +61,8 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "#F9F9F9",
+          backgroundColor: "#f5f5f5",
+          borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
         }}
       >
         <Typography
