@@ -7,12 +7,12 @@ import { Grid, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
-const BookCard = ({ categoryId, categoryName }) => {
+const BookCard = ({ categoryId, categoryName, routeName }) => {
   const navigate = useNavigate();
   return (
     <Paper
-      variant="outlined"
       elevation={0}
+      variant="outlined"
       sx={{
         p: 2,
         display: "flex",
@@ -27,10 +27,11 @@ const BookCard = ({ categoryId, categoryName }) => {
         lineHeight: "17px",
         color: "#858585",
         ":hover": {
-          boxShadow: 5, // theme.shadows[20]
+          boxShadow:
+            "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
         },
       }}
-      onClick={() => navigate(`/category/${categoryId}`)}
+      onClick={() => navigate(`/${routeName}/${categoryId}`)}
     >
       {categoryName}
     </Paper>
@@ -42,26 +43,32 @@ export default function CategorySection() {
     {
       categoryId: "2",
       categoryName: "Classics",
+      routeName: "classics",
     },
     {
       categoryId: "1",
       categoryName: "Comic Book",
+      routeName: "comic-book",
     },
     {
       categoryId: "3",
       categoryName: "Detective and Mystery",
+      routeName: "detective-and-mystery",
     },
     {
       categoryId: "4",
       categoryName: "Fantasy",
+      routeName: "fantasy",
     },
     {
       categoryId: "5",
       categoryName: "Historical Fiction",
+      routeName: "historical-fiction",
     },
     {
       categoryId: "6",
       categoryName: "Horror",
+      routeName: "horror",
     },
   ];
   return (
@@ -105,6 +112,7 @@ export default function CategorySection() {
                   categoryId={category.categoryId}
                   categoryImage={category.categoryImage}
                   categoryName={category.categoryName}
+                  routeName={category.routeName}
                 />
               </Grid>
             ))}
