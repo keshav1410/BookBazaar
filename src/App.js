@@ -11,6 +11,7 @@ import BookPage from "./Pages/BookPage";
 import PublishBook from "./Pages/PublishBook";
 import ManageUsers from "./Pages/ManageUsers";
 import UserProfile from "./Pages/UserProfile";
+import ManageBooks from "./Pages/ManageBooks";
 
 const App = () => {
   const theme = createTheme();
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/publish" element={<PublishBook />} />
             <Route path="/admin/manageusers" element={<ManageUsers />} />
             <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/managebooks" element={<ManageBooks />} />
           </Routes>
         </Router>
       </ThemeProvider>

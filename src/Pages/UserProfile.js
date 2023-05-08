@@ -4,7 +4,6 @@ import {
   Typography,
   Paper,
   TextField,
-  Button,
   Grid,
 } from "@mui/material";
 import React from "react";
@@ -77,6 +76,7 @@ const UserProfile = () => {
                 <img
                   style={{ borderRadius: "50%", border: "1px solid #000" }}
                   src="/assets/avatar.jpg"
+                  alt="User Profile Avatar"
                 />
               </Paper>
             </Grid>

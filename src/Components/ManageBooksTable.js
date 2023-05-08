@@ -5,19 +5,20 @@ import "../CSS/UsersManageTable.css";
 import axios from "axios";
 import ConfirmationModal from "./ConfirmationModal";
 
-export default function UsersManageTable({ users, showUsers }) {
+export default function ManageBooksTable({ books, showBooks }) {
   const [open, setOpen] = useState(false);
   const [currentRow, setCurrentRow] = useState();
 
-  const deleteUser = async (e) => {
+  const deleteBook = async (e) => {
+    console.log(currentRow);
     await axios
       .post(
-        `https://localhost:7250/api/Admin/api/Admin/users/${currentRow}/delete-user`
+        `https://localhost:7250/api/Vendor/api/users/8126999A-F96D-49ED-B355-BC95D738BD4B/${currentRow}/delete-book`
       )
       .then((res) => {
         console.log(res.data);
         setOpen(false);
-        showUsers();
+        showBooks();
       })
       .catch((error) => {
         console.log(error);
@@ -27,35 +28,41 @@ export default function UsersManageTable({ users, showUsers }) {
 
   const columns = [
     {
-      field: "firstName",
-      headerName: "First Name",
-      width: 130,
+      field: "title",
+      headerName: "Title",
+      width: 460,
       editable: false,
     },
     {
-      field: "lastName",
-      headerName: "Last Name",
-      width: 150,
+      field: "authorName",
+      headerName: "Author Name",
+      width: 160,
       editable: false,
     },
     {
-      field: "email",
-      headerName: "Email",
-      width: 250,
-      editable: false,
-    },
-    {
-      field: "isVendor",
-      headerName: "Is Vendor",
-      sortable: false,
+      field: "price",
+      headerName: "Price",
       width: 120,
+      editable: false,
+    },
+    {
+      field: "quantity",
+      headerName: "Quantity",
+      sortable: false,
+      width: 130,
+    },
+    {
+      field: "isbn",
+      headerName: "ISBN",
+      sortable: false,
+      width: 150,
     },
     {
       field: "delete",
-      headerName: "Delete User",
+      headerName: "Delete Book",
       renderCell: (params) => {
         const onSubmit = () => {
-          setCurrentRow(params.row.userID);
+          setCurrentRow(params.row.bookID);
           setOpen(true);
         };
 
@@ -76,28 +83,28 @@ export default function UsersManageTable({ users, showUsers }) {
     },
   ];
 
-  for (let i = 0; i < users.length; i++) {
-    users[i]["id"] = i;
+  for (let i = 0; i < books.length; i++) {
+    books[i]["id"] = i;
   }
 
   return (
-    <Box sx={{ height: 400, width: { lg: "70%", md: "80%", xs: "100%" } }}>
+    <Box sx={{ height: 480, width: { lg: "100%", md: "100%", xs: "100%" } }}>
       <ConfirmationModal
         open={open}
         setOpen={setOpen}
-        confirmDelete={deleteUser}
+        confirmDelete={deleteBook}
       />
       <DataGrid
-        rows={users}
+        rows={books}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 7,
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[7]}
         disableRowSelectionOnClick
         sx={{ borderRadius: "20px", boxShadow: 2 }}
       />
