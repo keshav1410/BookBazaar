@@ -1,5 +1,6 @@
 import { Box, Rating, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Card = ({ bookId, title, bookRating, price, bookCover }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Card = ({ bookId, title, bookRating, price, bookCover }) => {
         }}
       >
         <img
-          src={bookCover}
+          src="/assets/CategoryCover/HistoricalFiction.jpg"
           alt={title}
           height="350px"
           width="300px"
@@ -28,7 +29,7 @@ const Card = ({ bookId, title, bookRating, price, bookCover }) => {
               fontFamily: "Roboto",
               fontWeight: "700",
               fontSize: "18px",
-              lineHeight: "17px",
+              lineHeight: "20px",
               color: "#858585",
             }}
             gutterBottom

@@ -1,7 +1,4 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Grid, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -10,11 +7,8 @@ import { useNavigate } from "react-router-dom";
 const BookCard = ({ categoryId, categoryName, routeName }) => {
   const navigate = useNavigate();
   return (
-    <Paper
-      elevation={0}
-      variant="outlined"
-      sx={{
-        p: 2,
+    <Box
+      style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -22,10 +16,16 @@ const BookCard = ({ categoryId, categoryName, routeName }) => {
         height: "100px",
         width: "400px",
         fontFamily: "Montserrat",
-        fontWeight: "400",
+        fontWeight: "600",
         fontSize: "20px",
         lineHeight: "17px",
-        color: "#858585",
+        transition: "all 0.3s",
+        border: "1px solid rgb(224 224 224)",
+        borderRadius: "2px",
+        color: "#6e6c6c",
+      }}
+      sx={{
+        p: 2,
         ":hover": {
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
@@ -34,51 +34,46 @@ const BookCard = ({ categoryId, categoryName, routeName }) => {
       onClick={() => navigate(`/${routeName}/${categoryId}`)}
     >
       {categoryName}
-    </Paper>
+    </Box>
   );
 };
 
 export default function CategorySection() {
   const categoryData = [
     {
-      categoryId: "2",
+      categoryId: "693942EC-0F2D-4E22-BB9E-1BDD6786DA73",
       categoryName: "Classics",
       routeName: "classics",
     },
     {
-      categoryId: "1",
+      categoryId: "12FB4864-A627-4663-BD73-8301C620D04F",
       categoryName: "Comic Book",
       routeName: "comic-book",
     },
     {
-      categoryId: "3",
+      categoryId: "11637C8C-2B50-4505-AD59-3022B7C44545",
       categoryName: "Detective and Mystery",
       routeName: "detective-and-mystery",
     },
     {
-      categoryId: "4",
+      categoryId: "FD7753AB-4E4E-42F6-9136-906D6D3BBB13",
       categoryName: "Fantasy",
       routeName: "fantasy",
     },
     {
-      categoryId: "5",
+      categoryId: "0EC64D9E-C34A-4481-80D0-7C2FA3B0869B",
       categoryName: "Historical Fiction",
       routeName: "historical-fiction",
     },
     {
-      categoryId: "6",
+      categoryId: "BE9E68D3-1724-4F49-A0A3-08075288A94E",
       categoryName: "Horror",
       routeName: "horror",
     },
   ];
   return (
     <>
-      <Box
-        sx={{
-          p: 5,
-        }}
-        style={{ backgroundColor: "#F9F9F9" }}
-      >
+      <Box sx={{ p: 5 }}>
         <Typography
           variant="h3"
           sx={{
@@ -88,6 +83,7 @@ export default function CategorySection() {
             fontSize: "40px",
             lineHeight: "17px",
             color: "#858585",
+            background: "#fff",
           }}
           mb={6}
         >
