@@ -36,7 +36,7 @@ const CategoryPage = () => {
         setLoading(true);
         await axios
           .get(
-            `https://localhost:7250/api/Books/api/books/category/${categoryId}`
+            `https://localhost:7250/api/Books/${categoryId}/FilterBooksByCategory`
           )
           .then((response) => {
             console.log(response.data);

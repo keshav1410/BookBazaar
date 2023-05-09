@@ -13,7 +13,7 @@ export default function ManageBooksTable({ books, showBooks }) {
     console.log(currentRow);
     await axios
       .post(
-        `https://localhost:7250/api/Vendor/api/users/8126999A-F96D-49ED-B355-BC95D738BD4B/${currentRow}/delete-book`
+        `https://localhost:7250/api/Vendor/8126999A-F96D-49ED-B355-BC95D738BD4B/${currentRow}/delete-book`
       )
       .then((res) => {
         console.log(res.data);

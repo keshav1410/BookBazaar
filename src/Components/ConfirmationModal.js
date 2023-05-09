@@ -34,7 +34,7 @@ export default function ConfirmationModal({ open, setOpen, confirmDelete }) {
           </Button>
           <Button
             size="small"
-            variant="outlined"
+            variant="contained"
             color="error"
             onClick={confirmDelete}
             autoFocus

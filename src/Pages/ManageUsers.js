@@ -11,7 +11,7 @@ const ManageUsers = () => {
   const showUsers = async () => {
     setLoading(true);
     await axios
-      .get("https://localhost:7250/api/Admin/api/Admin/users")
+      .get("https://localhost:7250/api/Admin/GetUsers")
       .then((res) => {
         setUsers(res.data);
         setLoading(false);

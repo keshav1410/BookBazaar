@@ -11,9 +11,7 @@ export default function UsersManageTable({ users, showUsers }) {
 
   const deleteUser = async (e) => {
     await axios
-      .post(
-        `https://localhost:7250/api/Admin/api/Admin/users/${currentRow}/delete-user`
-      )
+      .post(`https://localhost:7250/api/Admin/${currentRow}/DeleteUser`)
       .then((res) => {
         console.log(res.data);
         setOpen(false);

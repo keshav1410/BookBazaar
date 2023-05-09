@@ -5,12 +5,15 @@ import {
   Paper,
   TextField,
   Grid,
+  LinearProgress,
 } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import axios from "axios";
+import { useSnackbar } from "notistack";
 
 const data = {
   firstName: "Aditya",
@@ -20,161 +23,217 @@ const data = {
 };
 
 const UserProfile = () => {
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
+  const [profile, setProfile] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = () => {
-    setChecked(true);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const getProfile = async () => {
+    setLoading(true);
+    await axios
+      .get(
+        "https://localhost:7250/api/Admin/0E9AA102-D7D7-448C-AC2A-177D91C880CF/GetUserById"
+      )
+      .then((res) => {
+        setProfile(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const handleChange = async () => {
+    if (!profile.isVendor && !checked) {
+      setChecked(true);
+      await axios
+        .post(
+          "https://localhost:7250/api/Vendor/0E9AA102-D7D7-448C-AC2A-177D91C880CF/ConvertToVendor"
+        )
+        .then((res) => {
+          console.log(res.data);
+          enqueueSnackbar("You are a vendor now", {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      enqueueSnackbar("User is already a vendor", {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
+    }
   };
 
   return (
     <>
-      <Box sx={{ mb: 5 }}>
-        <Navbar />
-      </Box>
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            mb: 4,
-          }}
-        >
-          <Typography
-            variant="h5"
-            textTransform="capitalize"
+      <Navbar />
+      {loading ? (
+        <LinearProgress />
+      ) : (
+        <Container sx={{ mt: 5 }} maxWidth="lg">
+          <Box
             sx={{
-              fontFamily: "Montserrat",
-              fontWeight: "700",
-              fontSize: "25px",
-              lineHeight: "17px",
-              color: "#858585",
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              mb: 4,
             }}
           >
-            User Profile
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: { lg: "row", xs: "column", md: "row" },
-          }}
-        >
-          <Grid container spacing={4}>
-            <Grid item md={4.5} xs={12}>
-              <Paper
-                elevation={2}
-                sx={{
-                  padding: "20px",
-                  borderRadius: "10px",
-                  width: "100%",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
-              >
-                <img
-                  style={{ borderRadius: "50%", border: "1px solid #000" }}
-                  src="/assets/avatar.jpg"
-                  alt="User Profile Avatar"
-                />
-              </Paper>
-            </Grid>
-            <Grid item md={7} xs={12}>
-              <Paper
-                elevation={2}
-                sx={{
-                  padding: "20px",
-                  borderRadius: "10px",
-                  width: "100%",
-                  mt: { lg: 0, md: 0, xs: 3 },
-                  mb: { lg: 0, md: 0, xs: 4 },
-                  position: "relative",
-                }}
-              >
-                <Grid
-                  container
-                  sx={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <Grid
-                    item
-                    md={5.5}
-                    xs={12}
-                    sx={{ mb: { lg: 4, md: 4, xs: 1 }, mt: 2 }}
-                  >
-                    <TextField
-                      id="firstName"
-                      label="First Name"
-                      defaultValue={data.firstName}
-                      sx={{ width: "100%" }}
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    md={5.5}
-                    xs={12}
-                    sx={{ mb: { lg: 0, md: 0, xs: 2 }, mt: 2 }}
-                  >
-                    <TextField
-                      id="lastName"
-                      label="Last Name"
-                      sx={{ width: "100%" }}
-                      defaultValue={data.lastName}
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </Grid>
-
-                  <Grid
-                    item
-                    md={11.5}
-                    xs={12}
-                    sx={{
-                      mb: { lg: 9.5, md: 9.5, xs: 10 },
-                      alignItems: "left",
-                    }}
-                  >
-                    <TextField
-                      id="email"
-                      label="Email"
-                      defaultValue={data.email}
-                      sx={{ width: "100%" }}
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-                <Box
+            <Typography
+              variant="h5"
+              textTransform="capitalize"
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: "700",
+                fontSize: "25px",
+                lineHeight: "17px",
+                color: "#858585",
+              }}
+            >
+              User Profile
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: { lg: "row", xs: "column", md: "row" },
+            }}
+          >
+            <Grid container spacing={4}>
+              <Grid item md={4.5} xs={12}>
+                <Paper
+                  elevation={2}
                   sx={{
-                    background: "#DCDCDC",
-                    padding: "5px",
-                    paddingRight: "15px",
-                    position: "absolute",
-                    left: { lg: 35, md: 35, xs: 22 },
-                    bottom: 20,
+                    padding: "20px",
                     borderRadius: "10px",
+                    width: "100%",
+                    alignItems: "center",
+                    textAlign: "center",
                   }}
                 >
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Switch checked={checked} onChange={handleChange} />
-                      }
-                      label="Want to be a Vendor ?"
-                      labelPlacement="start"
-                    />
-                  </FormGroup>
-                </Box>
-              </Paper>
+                  <img
+                    style={{ borderRadius: "50%", border: "1px solid #000" }}
+                    src="/assets/avatar.jpg"
+                    alt="User Profile Avatar"
+                  />
+                </Paper>
+              </Grid>
+              <Grid item md={7} xs={12}>
+                <Paper
+                  elevation={2}
+                  sx={{
+                    padding: "20px",
+                    borderRadius: "10px",
+                    width: "100%",
+                    mt: { lg: 0, md: 0, xs: 3 },
+                    mb: { lg: 0, md: 0, xs: 4 },
+                    position: "relative",
+                  }}
+                >
+                  <Grid
+                    container
+                    sx={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <Grid
+                      item
+                      md={5.5}
+                      xs={12}
+                      sx={{ mb: { lg: 4, md: 4, xs: 1 }, mt: 2 }}
+                    >
+                      <TextField
+                        id="firstName"
+                        label="First Name"
+                        defaultValue={profile?.firstName}
+                        sx={{ width: "100%" }}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      md={5.5}
+                      xs={12}
+                      sx={{ mb: { lg: 0, md: 0, xs: 2 }, mt: 2 }}
+                    >
+                      <TextField
+                        id="lastName"
+                        label="Last Name"
+                        sx={{ width: "100%" }}
+                        defaultValue={profile?.lastName}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      md={11.5}
+                      xs={12}
+                      sx={{
+                        mb: { lg: 9.5, md: 9.5, xs: 10 },
+                        alignItems: "left",
+                      }}
+                    >
+                      <TextField
+                        id="email"
+                        label="Email"
+                        defaultValue={profile?.email}
+                        sx={{ width: "100%" }}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Box
+                    sx={{
+                      background: "#DCDCDC",
+                      padding: "5px",
+                      paddingRight: "15px",
+                      position: "absolute",
+                      left: { lg: 35, md: 35, xs: 22 },
+                      bottom: 20,
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={profile.isVendor ? true : checked}
+                            onChange={handleChange}
+                          />
+                        }
+                        label="Want to be a Vendor ?"
+                        labelPlacement="start"
+                      />
+                    </FormGroup>
+                  </Box>
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-      </Container>
+          </Box>
+        </Container>
+      )}
     </>
   );
 };
