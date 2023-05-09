@@ -1,4 +1,4 @@
-import { ActionTypes } from "../Constants/ActionTypes";
+import { ActionTypes } from "../Constants/actionTypes";
 
 const initialState = {
   books: [],

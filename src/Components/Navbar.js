@@ -25,11 +25,11 @@ const Navbar = () => {
     },
     {
       name: "Manage Books",
-      route: "account",
+      route: "managebooks",
     },
     {
       name: "Manage Users",
-      route: "manageusers",
+      route: "admin/manageusers",
     },
     {
       name: "Logout",

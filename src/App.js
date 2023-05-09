@@ -35,7 +35,7 @@ const App = () => {
             <Route path="/settings" element={<BookPage />} />
             <Route path="/publish" element={<PublishBook />} />
             <Route path="/admin/manageusers" element={<ManageUsers />} />
-            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route path="/managebooks" element={<ManageBooks />} />
           </Routes>
         </Router>

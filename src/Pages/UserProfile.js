@@ -33,7 +33,7 @@ const UserProfile = () => {
     setLoading(true);
     await axios
       .get(
-        "https://localhost:7250/api/Admin/0E9AA102-D7D7-448C-AC2A-177D91C880CF/GetUserById"
+        "https://localhost:7250/api/Admin/8126999A-F96D-49ED-B355-BC95D738BD4B/GetUserById"
       )
       .then((res) => {
         setProfile(res.data);
@@ -54,7 +54,7 @@ const UserProfile = () => {
       setChecked(true);
       await axios
         .post(
-          "https://localhost:7250/api/Vendor/0E9AA102-D7D7-448C-AC2A-177D91C880CF/ConvertToVendor"
+          "https://localhost:7250/api/Vendor/8126999A-F96D-49ED-B355-BC95D738BD4B/ConvertToVendor"
         )
         .then((res) => {
           console.log(res.data);
