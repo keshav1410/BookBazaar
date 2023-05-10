@@ -42,6 +42,7 @@ const SmallCard = ({ title, desc, cardImage }) => {
         sx={{ width: 90, objectFit: "contain" }}
         image={cardImage}
         alt="Live from space album cover"
+        style={{ filter: "grayscale(100%)" }}
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
@@ -79,7 +80,7 @@ export default function InfoSection() {
     <Container sx={{ mt: 5 }}>
       <Grid container spacing={0}>
         {data.map((icons, index) => (
-          <Grid key={index} item md={3}>
+          <Grid key={index} item md={3} sm={6} xs={12}>
             <SmallCard {...icons} />
           </Grid>
         ))}

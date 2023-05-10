@@ -17,7 +17,7 @@ const Navbar = () => {
   const settings = [
     {
       name: "Profile",
-      route: "userprofile",
+      route: "profile",
     },
     {
       name: "Publish Book",

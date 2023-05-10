@@ -24,7 +24,9 @@ const BookPage = () => {
       const fetchBook = async () => {
         setLoading(true);
         await axios
-          .get(`https://localhost:7250/api/Books/api/book/${bookId}`)
+          .get(
+            `${process.env.REACT_APP_API_URL}/Books/${bookId}/FilterBookById`
+          )
           .then((res) => {
             console.log(res.data);
             dispatch(selectBook(res.data));

@@ -26,7 +26,7 @@ const UserProfile = () => {
     setLoading(true);
     await axios
       .get(
-        "https://localhost:7250/api/Admin/EE471BC0-F145-494D-9EB0-55C77D26D43A/GetUserById"
+        "https://localhost:7250/api/Admin/8126999A-F96D-49ED-B355-BC95D738BD4B/GetUserById"
       )
       .then((res) => {
         setProfile(res.data);
@@ -47,7 +47,7 @@ const UserProfile = () => {
       setChecked(true);
       await axios
         .post(
-          "https://localhost:7250/api/Vendor/EE471BC0-F145-494D-9EB0-55C77D26D43A/ConvertToVendor"
+          "https://localhost:7250/api/Vendor/8126999A-F96D-49ED-B355-BC95D738BD4B/ConvertToVendor"
         )
         .then((res) => {
           console.log(res.data);

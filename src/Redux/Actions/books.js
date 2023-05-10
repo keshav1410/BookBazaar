@@ -1,4 +1,4 @@
-import { ActionTypes } from "../Constants/ActionTypes";
+import { ActionTypes } from "../Constants/actionTypes";
 
 export const addBooks = (books) => {
   return {

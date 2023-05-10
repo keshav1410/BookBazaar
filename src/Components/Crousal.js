@@ -8,9 +8,10 @@ const Crousal = () => {
 
   const items = [
     <img
-      src="/assets/crousal/bazaar.jpg"
+      src="/assets/ExtraImages/book.jpg"
       onDragStart={handleDragStart}
       role="presentation"
+      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
     />,
     <img
       src="/assets/crousal/books.jpg"
