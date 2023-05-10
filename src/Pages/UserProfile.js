@@ -15,25 +15,18 @@ import Switch from "@mui/material/Switch";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 
-const data = {
-  firstName: "Aditya",
-  lastName: "Goyal",
-  email: "adityago563@gmail.com",
-  password: "Aditya@123",
-};
-
 const UserProfile = () => {
   const [checked, setChecked] = useState(false);
   const [profile, setProfile] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const getProfile = async () => {
     setLoading(true);
     await axios
       .get(
-        "https://localhost:7250/api/Admin/0E9AA102-D7D7-448C-AC2A-177D91C880CF/GetUserById"
+        "https://localhost:7250/api/Admin/EE471BC0-F145-494D-9EB0-55C77D26D43A/GetUserById"
       )
       .then((res) => {
         setProfile(res.data);
@@ -54,7 +47,7 @@ const UserProfile = () => {
       setChecked(true);
       await axios
         .post(
-          "https://localhost:7250/api/Vendor/0E9AA102-D7D7-448C-AC2A-177D91C880CF/ConvertToVendor"
+          "https://localhost:7250/api/Vendor/EE471BC0-F145-494D-9EB0-55C77D26D43A/ConvertToVendor"
         )
         .then((res) => {
           console.log(res.data);

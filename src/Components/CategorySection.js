@@ -21,7 +21,7 @@ const BookCard = ({ categoryId, categoryName, routeName }) => {
         lineHeight: "17px",
         transition: "all 0.3s",
         border: "1px solid rgb(224 224 224)",
-        borderRadius: "2px",
+        borderRadius: "6px",
         color: "#6e6c6c",
       }}
       sx={{
