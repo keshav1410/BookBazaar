@@ -36,7 +36,7 @@ const CategoryPage = () => {
         setLoading(true);
         await axios
           .get(
-            `https://localhost:7250/api/Books/${categoryId}/FilterBooksByCategory`
+            `${process.env.REACT_APP_API_URL}/Books/${categoryId}/FilterBooksByCategory`
           )
           .then((response) => {
             console.log(response.data);
