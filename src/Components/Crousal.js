@@ -8,20 +8,28 @@ const Crousal = () => {
 
   const items = [
     <img
-      src="/assets/crousal/bazaar.jpg"
+      src="/assets/crousal/banner1.jpg"
       onDragStart={handleDragStart}
       role="presentation"
+      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
     />,
     <img
-      src="/assets/crousal/books.jpg"
+      src="/assets/crousal/banner2.jpg"
       onDragStart={handleDragStart}
       role="presentation"
-      style={{ width: "100%" }}
+      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
     />,
     <img
-      src="/assets/crousal/vinyl-records.jpg"
+      src="/assets/crousal/banner3.jpg"
       onDragStart={handleDragStart}
       role="presentation"
+      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
+    />,
+    <img
+      src="/assets/crousal/banner4.jpg"
+      onDragStart={handleDragStart}
+      role="presentation"
+      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
     />,
   ];
   return (

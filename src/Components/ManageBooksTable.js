@@ -4,10 +4,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import "../CSS/UsersManageTable.css";
 import axios from "axios";
 import ConfirmationModal from "./ConfirmationModal";
+import { useSnackbar } from "notistack";
 
 export default function ManageBooksTable({ books, showBooks }) {
   const [open, setOpen] = useState(false);
   const [currentRow, setCurrentRow] = useState();
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const deleteBook = async (e) => {
     console.log(currentRow);
@@ -19,10 +22,24 @@ export default function ManageBooksTable({ books, showBooks }) {
         console.log(res.data);
         setOpen(false);
         showBooks();
+        enqueueSnackbar("Book Deleted successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
       })
       .catch((error) => {
         console.log(error);
         setOpen(false);
+        enqueueSnackbar("Unable to delete user", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
       });
   };
 

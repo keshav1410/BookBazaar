@@ -4,10 +4,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import "../CSS/UsersManageTable.css";
 import axios from "axios";
 import ConfirmationModal from "./ConfirmationModal";
+import { useSnackbar } from "notistack";
 
 export default function UsersManageTable({ users, showUsers }) {
   const [open, setOpen] = useState(false);
   const [currentRow, setCurrentRow] = useState();
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const deleteUser = async (e) => {
     await axios
@@ -16,10 +19,24 @@ export default function UsersManageTable({ users, showUsers }) {
         console.log(res.data);
         setOpen(false);
         showUsers();
+        enqueueSnackbar("User Deleted successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
       })
       .catch((error) => {
         console.log(error);
         setOpen(false);
+        enqueueSnackbar("Unable to delete user", {
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        });
       });
   };
 

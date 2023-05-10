@@ -15,19 +15,12 @@ import Switch from "@mui/material/Switch";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 
-const data = {
-  firstName: "Aditya",
-  lastName: "Goyal",
-  email: "adityago563@gmail.com",
-  password: "Aditya@123",
-};
-
 const UserProfile = () => {
   const [checked, setChecked] = useState(false);
   const [profile, setProfile] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const getProfile = async () => {
     setLoading(true);
