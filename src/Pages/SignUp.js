@@ -35,26 +35,25 @@ export default function SignUp() {
   });
 
   const onSubmit = (data) => {
-    if (data.firstName && data.email && data.lastName && data.password) {
-      setLoading(true);
-      axios
-        .post(`https://localhost:7250/api/Auth/api/signup`, data)
-        .then((response) => {
-          console.log(response.data);
-          reset();
-          // setMessage(response.data.message);
-          setLoading(false);
-          setSeverity("success");
-          setOpen(true);
-          navigate("/signin");
-        })
-        .catch((error) => {
-          setMessage(error.data.message);
-          setLoading(false);
-          setSeverity("error");
-          setOpen(true);
-        });
-    }
+    console.log(data);
+    setLoading(true);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/Auth/SignUp`, data)
+      .then((response) => {
+        console.log(response.data);
+        reset();
+        // setMessage("User Signed Up Successfully");
+        // setSeverity("success");
+        // setOpen(true);
+        setLoading(false);
+        navigate("/signin");
+      })
+      .catch((error) => {
+        setMessage("Error while sining up");
+        setLoading(false);
+        setSeverity("error");
+        setOpen(true);
+      });
   };
   const handleClose = () => {
     setOpen(false);

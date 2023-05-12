@@ -11,25 +11,25 @@ const Crousal = () => {
       src="/assets/crousal/banner1.jpg"
       onDragStart={handleDragStart}
       role="presentation"
-      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
+      style={{ height: "70vh", width: "100%", objectFit: "cover" }}
     />,
     <img
       src="/assets/crousal/banner2.jpg"
       onDragStart={handleDragStart}
       role="presentation"
-      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
+      style={{ height: "70vh", width: "100%", objectFit: "cover" }}
     />,
     <img
       src="/assets/crousal/banner3.jpg"
       onDragStart={handleDragStart}
       role="presentation"
-      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
+      style={{ height: "70vh", width: "100%", objectFit: "cover" }}
     />,
     <img
       src="/assets/crousal/banner4.jpg"
       onDragStart={handleDragStart}
       role="presentation"
-      style={{ height: "80vh", width: "100%", objectFit: "cover" }}
+      style={{ height: "70vh", width: "100%", objectFit: "cover" }}
     />,
   ];
   return (

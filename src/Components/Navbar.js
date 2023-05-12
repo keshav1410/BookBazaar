@@ -90,13 +90,17 @@ const Navbar = () => {
         >
           <IconButton aria-label="cart" sx={{ mr: 1 }}>
             <StyledBadge badgeContent={4} color="secondary">
-              <ShoppingCartIcon />
+              <ShoppingCartIcon
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              />
             </StyledBadge>
           </IconButton>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/assets/avatar.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -120,6 +124,8 @@ const Navbar = () => {
                     textAlign="center"
                     onClick={() => {
                       if (setting.name === "Logout") {
+                        sessionStorage.removeItem("user");
+                        navigate("/signin");
                       } else {
                         navigate(`/${setting.route}`);
                       }

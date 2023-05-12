@@ -13,9 +13,12 @@ import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../Redux/Actions/user";
+import { useDispatch } from "react-redux";
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,27 +35,31 @@ export default function SignIn() {
     },
   });
   const onSubmit = (data) => {
-    if (data.email && data.password) {
-      setLoading(true);
-      axios
-        .post(`https://localhost:7250/api/Auth/api/login`, data)
-        .then((response) => {
-          console.log(response.data);
-          reset();
-          setMessage("User Logged in Successfully");
-          setLoading(false);
-          setSeverity("success");
-          setOpen(true);
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error);
-          setMessage("Error while logging in");
-          setLoading(false);
-          setSeverity("error");
-          setOpen(true);
-        });
-    }
+    console.log(data);
+    setLoading(true);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/Auth/Login`, data)
+      .then((response) => {
+        console.log(response.data);
+        reset();
+        // setMessage("User Logged in Successfully");
+        // setSeverity("success");
+        // setOpen(true);
+        setLoading(false);
+        dispatch(addUser(response.data.authticatedUser));
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify(response.data.authticatedUser)
+        );
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        setMessage(error.response.data || "Error while Sighning in");
+        setSeverity("error");
+        setLoading(false);
+        setOpen(true);
+      });
   };
   const handleClose = () => {
     setOpen(false);
@@ -108,11 +115,7 @@ export default function SignIn() {
             helperText={
               errors.password?.type === "required" && "Password is required"
             }
-            {...register("password", {
-              required: true,
-              pattern:
-                /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
-            })}
+            {...register("password", { required: true })}
           />
           <LoadingButton
             type="submit"

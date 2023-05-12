@@ -12,6 +12,7 @@ import PublishBook from "./Pages/PublishBook";
 import ManageUsers from "./Pages/ManageUsers";
 import UserProfile from "./Pages/UserProfile";
 import ManageBooks from "./Pages/ManageBooks";
+import Cart from "./Pages/Cart";
 
 const App = () => {
   const theme = createTheme();
@@ -31,8 +32,7 @@ const App = () => {
               element={<CategoryPage />}
             />
             <Route path="/book/:bookId" element={<BookPage />} />
-            <Route path="/profile/:userId" element={<BookPage />} />
-            <Route path="/settings" element={<BookPage />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/publish" element={<PublishBook />} />
             <Route path="/admin/manageusers" element={<ManageUsers />} />
             <Route path="/profile" element={<UserProfile />} />
